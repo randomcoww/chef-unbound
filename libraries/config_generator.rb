@@ -3,7 +3,7 @@ module ConfigGenerator
 
     ## gererate yaml like config that unbound uses from hash
     ## sample source config
-    
+
     # {
     #   :server => {
     #     :k1 => 'v1',

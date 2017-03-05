@@ -32,7 +32,7 @@ class Chef
 
       def unbound_config
         @nsd_config ||= Chef::Resource::File.new('/etc/unbound/unbound.conf', run_context).tap do |r|
-          r.content ConfigGenerator.generate(new_resource.config)
+          r.content UnboundConfig.generate(new_resource.config)
         end
       end
     end
