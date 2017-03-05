@@ -32,6 +32,24 @@ module ConfigGenerator
     #   ]
     # }
 
+    ## expected
+    # server:
+    #   interface: if1
+    #   interface: if2
+    #   interface-automatic: yes
+    #   port: 53
+    # remote-control:
+    #   control-enable: yes
+    # zone:
+    #   name: z1
+    #   zonefile: z1file
+    # zone:
+    #   name: z2
+    #   zonefile: z2file
+    # zone:
+    #   name: z3
+    #   zonefile: z3file
+
     def self.generate(config_hash)
       out = []
 
@@ -43,7 +61,7 @@ module ConfigGenerator
 
     def self.parse_object(out, k, v, prefix)
       if v.is_a?(Hash)
-        out << [prefix, k, ':'].join('')
+        out << [prefix, k, ':'].join
         v.each do |e, f|
           parse_object(out, e, f, prefix + '  ')
         end
@@ -54,13 +72,13 @@ module ConfigGenerator
         end
 
       elsif v.is_a?(String) || v.is_a?(Integer)
-        out << [prefix, k, ': ', v].join('')
+        out << [prefix, k, ': ', v].join
 
       elsif v.is_a?(TrueClass)
-        out << [prefix, k, ': ', 'yes'].join('')
+        out << [prefix, k, ': ', 'yes'].join
 
       elsif v.is_a?(FalseClass)
-        out << [prefix, k, ': ', 'no'].join('')
+        out << [prefix, k, ': ', 'no'].join
       end
     end
   end
