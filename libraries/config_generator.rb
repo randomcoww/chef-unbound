@@ -1,16 +1,20 @@
 module ConfigGenerator
   class UnboundConfig
 
-    ## gererate yaml like config that unbound uses from hash
-    ## sample source config
+    ## convert hash to yaml like config that unbound and nsd use
 
+    ## sample source config
     # {
     #   :server => {
-    #     :k1 => 'v1',
-    #     :k2 => 'v2'
+    #     :interface => [
+    #       'if1',
+    #       'if2'
+    #     ],
+    #     'interface-automatic' => true,
+    #     :port => 53
     #   },
     #   'remote-control' => {
-    #     'control-enanled' => true
+    #     'control-enable' => true
     #   },
     #   :zone => [
     #     {
@@ -29,30 +33,35 @@ module ConfigGenerator
     # }
 
     def self.generate(config_hash)
-      f.parse_hash([], config_hash, '')
-    end
+      out = []
 
-    def self.parse_hash(out, c, prefix)
-      if c.is_a?(Hash)
-        c.each do |k, v|
-          if v.is_a?(Array)
-            v.each do |e|
-              out << [prefix, k, ':'].join('')
-              parse_hash(out, e, prefix + '  ')
-            end
-          elsif v.is_a?(Hash)
-            out << [prefix, k, ':'].join('')
-            parse_hash(out, v, prefix + '  ')
-          elsif v.is_a?(String) || v.is_a?(Integer)
-            out << [prefix, k, ': ', v].join('')
-          elsif v.is_a?(TrueClass)
-            out << [prefix, k, ': ', 'yes'].join('')
-          elsif v.is_a?(FalseClass)
-            out << [prefix, k, ': ', 'no'].join('')
-          end
-        end
+      config_hash.each do |k, v|
+        parse_object(out, k, v, '')
       end
       return out.join($/)
+    end
+
+    def self.parse_object(out, k, v, prefix)
+      if v.is_a?(Hash)
+        out << [prefix, k, ':'].join('')
+        v.each do |e, f|
+          parse_object(out, e, f, prefix + '  ')
+        end
+
+      elsif v.is_a?(Array)
+        v.each do |e|
+          parse_object(out, k, e, prefix)
+        end
+
+      elsif v.is_a?(String) || v.is_a?(Integer)
+        out << [prefix, k, ': ', v].join('')
+
+      elsif v.is_a?(TrueClass)
+        out << [prefix, k, ': ', 'yes'].join('')
+
+      elsif v.is_a?(FalseClass)
+        out << [prefix, k, ': ', 'no'].join('')
+      end
     end
   end
 end
