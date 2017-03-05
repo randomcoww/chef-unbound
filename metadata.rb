@@ -1,0 +1,7 @@
+name             'unbound'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures unbound'
+long_description 'Installs/Configures unbound'
+version          '0.1.0'
