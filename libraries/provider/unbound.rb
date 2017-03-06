@@ -1,6 +1,3 @@
-# require_relative '../unbound'
-# require_relative '../config_generator'
-
 class ChefUnbound
   class Provider
     class Config < Chef::Provider
