@@ -6,6 +6,8 @@ require_relative '../config_generator'
 class ChefUnbound
   class Resource
     class Config < Chef::Resource
+      include ConfigGenerator
+
       resource_name :unbound_config
 
       default_action :create
