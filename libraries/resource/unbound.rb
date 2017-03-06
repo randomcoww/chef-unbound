@@ -1,7 +1,11 @@
+require 'chef/resource'
+
+require_relative '../unbound'
+require_relative '../config_generator'
+
 class ChefUnbound
   class Resource
     class Config < Chef::Resource
-      include Unbound
       include ConfigGenerator
 
       resource_name :unbound_config
