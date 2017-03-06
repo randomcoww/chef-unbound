@@ -1,12 +1,25 @@
-class Chef
+class ChefUnbound
   class Resource
-    class Unbound < Chef::Resource
-      resource_name :unbound
+    class Config < Chef::Resource
 
-      default_action :deploy
-      allowed_actions :deploy
+      resource_name :unbound_config
 
-      property :config, Hash
+      default_action :create
+      allowed_actions :create, :delete
+
+      property :exists, [TrueClass, FalseClass]
+      property :content, String, default: lazy { generate_config(config) }
+      property :path, String, desired_state: false,
+                              default: lazy { Unbound::CONFIG_PATH }
+
+      private
+
+      def config(arg = nil)
+        set_or_return(
+          :config,
+          arg,
+          :kind_of => [ Hash ])
+      end
     end
   end
 end
