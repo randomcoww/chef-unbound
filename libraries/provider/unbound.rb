@@ -1,5 +1,5 @@
-require 'chef/provider'
-require 'chef/resource/file'
+# require 'chef/provider'
+# require 'chef/resource/file'
 
 require_relative '../unbound'
 require_relative '../config_generator'
