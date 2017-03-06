@@ -1,8 +1,6 @@
 class Chef
   class Provider
     class Unbound < Chef::Provider
-      include ConfigGenerator
-
       provides :unbound_config, os: "linux"
 
       def load_current_resource
