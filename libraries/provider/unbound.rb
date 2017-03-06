@@ -1,8 +1,5 @@
-# require 'chef/provider'
-# require 'chef/resource/file'
-
-require_relative '../unbound'
-require_relative '../config_generator'
+# require_relative '../unbound'
+# require_relative '../config_generator'
 
 class ChefUnbound
   class Provider
