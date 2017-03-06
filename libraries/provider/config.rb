@@ -32,7 +32,7 @@ class ChefUnbound
       private
 
       def unbound_config
-        @unbound_config ||= Chef::Resource::File.new('unbound.conf', run_context).tap do |r|
+        @unbound_config ||= Chef::Resource::File.new(new_resource.path, run_context).tap do |r|
           r.path new_resource.path
           r.content new_resource.content
         end
