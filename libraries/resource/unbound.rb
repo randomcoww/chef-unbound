@@ -14,16 +14,17 @@ class ChefUnbound
       allowed_actions :create, :delete
 
       property :exists, [TrueClass, FalseClass]
+      property :config, Hash
       property :content, String, default: lazy { to_conf }
       property :path, String, desired_state: false,
                               default: lazy { Unbound::CONFIG_PATH }
 
-      def config(arg = nil)
-        set_or_return(
-          :config,
-          arg,
-          :kind_of => [ Hash ])
-      end
+      # def config(arg = nil)
+      #   set_or_return(
+      #     :config,
+      #     arg,
+      #     :kind_of => [ Hash ])
+      # end
 
       private
 
