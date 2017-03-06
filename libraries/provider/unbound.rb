@@ -1,10 +1,10 @@
-class Chef
+class ChefUnbound
   class Provider
-    class Unbound < Chef::Provider
+    class Config < Chef::Provider
       provides :unbound_config, os: "linux"
 
       def load_current_resource
-        @current_resource = Chef::Resource::Unbound.new(new_resource.name)
+        @current_resource = ChefUnbound::Resource::Config.new(new_resource.name)
 
         current_resource.exists(::File.exist?(new_resource.path))
 

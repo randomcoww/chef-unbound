@@ -1,7 +1,6 @@
 class ChefUnbound
   class Resource
-    class Config < Chef::Resource
-
+    class Config < Chef::Resource          
       resource_name :unbound_config
 
       default_action :create
