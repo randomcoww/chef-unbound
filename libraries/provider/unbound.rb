@@ -29,7 +29,7 @@ class ChefUnbound
         end if !current_resource.exists || current_resource.content != new_resource.content
       end
 
-      def action_create
+      def action_delete
         converge_by("Delete unbound config: #{new_resource}") do
           unbound_config.run_action(:delete)
         end if current_resource.exists
