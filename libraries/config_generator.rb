@@ -34,7 +34,7 @@ module ConfigGenerator
     out = []
 
     config_hash.each do |k, v|
-      parse_object(out, k, v, '')
+      parse_config_object(out, k, v, '')
     end
     return out.join($/)
   end
