@@ -14,6 +14,7 @@ class ChefUnbound
       allowed_actions :create, :delete
 
       property :exists, [TrueClass, FalseClass]
+      property :content, String, default: lazy { to_conf }
       property :path, String, desired_state: false,
                               default: lazy { Unbound::CONFIG_PATH }
 
@@ -24,7 +25,9 @@ class ChefUnbound
           :kind_of => [ Hash ])
       end
 
-      def content
+      private
+
+      def to_conf
         generate_config(config)
       end
     end
