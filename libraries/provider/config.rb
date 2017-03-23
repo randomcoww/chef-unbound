@@ -19,6 +19,7 @@ class ChefUnbound
 
       def action_create
         converge_by("Create unbound config: #{new_resource}") do
+          create_base_path
           unbound_config.run_action(:create)
         end if !current_resource.exists || current_resource.content != new_resource.content
       end
@@ -30,6 +31,12 @@ class ChefUnbound
       end
 
       private
+
+      def create_base_path
+        Chef::Resource::Directory.new(::File.dirname(new_resource.pay), run_context).tap do |r|
+          r.recursive true
+        end.run_action(:create_if_missing)
+      end
 
       def unbound_config
         @unbound_config ||= Chef::Resource::File.new(new_resource.path, run_context).tap do |r|
