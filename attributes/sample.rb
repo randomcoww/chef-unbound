@@ -35,7 +35,3 @@ node.default['unbound']['sample']['config'] = {
     }
   ]
 }
-
-# node.default['nsd']['sample']['rndc_keys_data_bag'] = 'deploy_config'
-# node.default['nsd']['sample']['rndc_keys_data_bag_item'] = 'rndc_keys'
-# node.default['nsd']['sample']['rndc_key_names'] = ['rndc-test-key']
