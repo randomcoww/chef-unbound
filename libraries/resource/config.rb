@@ -1,7 +1,7 @@
 class ChefUnbound
   class Resource
     class Config < Chef::Resource
-      include NsdHelper
+      include NsdResourceHelper
 
       resource_name :unbound_config
 
@@ -16,7 +16,7 @@ class ChefUnbound
       private
 
       def to_conf
-        NsdHelper::ConfigGenerator.generate_from_hash(config)
+        ConfigGenerator.generate_from_hash(config)
       end
     end
   end
