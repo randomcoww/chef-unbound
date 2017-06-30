@@ -1,7 +1,7 @@
 class ChefUnbound
   class Resource
     class Config < Chef::Resource
-      include NsdConfigGenerator
+      include NsdHelper
 
       resource_name :unbound_config
 
@@ -11,12 +11,12 @@ class ChefUnbound
       property :config, Hash
       property :content, [String,NilClass], default: lazy { to_conf }
       property :path, String, desired_state: false,
-                              default: lazy { Unbound::CONFIG_PATH }
+                              default: lazy { UnboundHelper::CONFIG_PATH }
 
       private
 
       def to_conf
-        generate_config(config)
+        NsdHelper::ConfigGenerator.generate_from_hash(config)
       end
     end
   end
